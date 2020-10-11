@@ -35,7 +35,7 @@
             $stmt->bindValue(':favorite', $favorite, PDO::PARAM_STR);
             $stmt->execute();
 
-            $stmta = $dbh->query("select * from survey");
+            $stmta = $dbh->query("select favorite, count(*) as cnt from survey group by favorite");
             $json = json_encode($stmta->fetchAll(PDO::FETCH_ASSOC));
         } catch (PDOException $e) {
             $error = $e->getMessage();
@@ -55,15 +55,8 @@
                 count: group.length,
             }
         }
-        const result = _(json)
-            .groupBy('favorite')
-            .mapValues(groupCount)
-            .value();
-
-        const labels = Object.keys(result)
-        const data = Object.values(result).map(obj => {
-            return obj.count
-        })
+        const labels = _.map(json, 'favorite');
+        const data = _.map(json, 'cnt');
 
         const ctx = document.querySelector('#chart').getContext('2d');
         const myBarChart = new Chart(ctx, {
@@ -73,6 +66,7 @@
                 datasets: [{
                     label: "好きな言語",
                     data: data,
+                    backgroundColor: ['rgba(255,182,185,1)', 'rgba(250,227,217,1)', 'rgba(187,222,214,1)', 'rgba(138,198,209,1)']
                 }]
             },
             options: {
@@ -81,7 +75,23 @@
                     colorschemes: {
                         scheme: 'brewer.Paired12'
                     }
-                }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    fontSize: 18,
+                    text: '好きな言語調査'
+                },
             }
         });
     </script>

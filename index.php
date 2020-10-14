@@ -5,21 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="src/css/style.css">
 </head>
 
 <body>
     <div>
-        <form action="./src/finish.php" method="post">
-            <input type="text" name="name">
-            <input type="email" name="email">
-            <select name="favorite">
-                <option value="html">html</option>
-                <option value="css">css</option>
-                <option value="javascript">javascript</option>
-                <option value="php">php</option>
-            </select>
-            <input type="submit">
-        </form>
+        <?php require_once('./src/components//form.php'); ?>
     </div>
 </body>
 

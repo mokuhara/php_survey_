@@ -17,7 +17,10 @@
 
         require('./db/Repository.php');
         $sql = "select favorite, count(*) as cnt from survey group by favorite";
+        //mysql利用する場合変更
         $type = "mysql";
+        //file利用する場合変更
+        // $type = "file";
 
         $db = new Repository($type);
         $db->save($name, $email, $favorite);

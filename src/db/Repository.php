@@ -12,12 +12,7 @@ class Repository
 
     public function save($name = null, $email = null, $favorite = null)
     {
-        include './ChromePhp.php';
-        if ($this->_db->type == 'mysql') {
-            return $this->_db->save($name, $email, $favorite);
-        } else {
-            return $this->_db->save();
-        }
+        return $this->_db->save($name, $email, $favorite);
     }
 
     public function read($sql = null)

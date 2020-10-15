@@ -4,10 +4,10 @@ import Piec from '../src/chart/pie.js'
 const app = new Vue({
     el: "#app",
     data: {
-        message: "Vue.js"
+        selected: 'bar',
     },
     components: {
         Barc,
         Piec
-    }
+    },
 })

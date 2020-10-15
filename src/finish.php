@@ -34,8 +34,16 @@
     <div class="data" data-name="<?php echo htmlspecialchars($json, ENT_QUOTES, 'UTF-8'); ?>"></div>
 
     <div id="app">
-        <div>
+        <select v-model="selected">
+            <option value="pie">円グラフ</option>
+            <option value="bar">棒グラフ</option>
+        </select>
+
+        <div v-if="selected === 'pie'">
             <Piec />
+        </div>
+
+        <div v-if="selected === 'bar'">
             <Barc />
         </div>
     </div>
